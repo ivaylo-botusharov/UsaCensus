@@ -26,25 +26,32 @@ public class DatabaseInitializer
     public void Initialize()
     {
         var database = this.mongoClient.GetDatabase(this.databaseName);
-        var collection = database.GetCollection<BsonDocument>(this.collectionName);
+        var collectionExists = CollectionExists(database, this.collectionName);
 
-        var filter = new BsonDocument("name", this.collectionName);
-        var collections = database.ListCollections(new ListCollectionsOptions { Filter = filter });
-
-        if (!collections.Any())
+        if (!collectionExists)
         {
             database.CreateCollection(this.collectionName);
 
+            var collection = database.GetCollection<BsonDocument>(this.collectionName);
             collection.InsertMany(initialDocuments);
         }
         else
         {
+            var collection = database.GetCollection<BsonDocument>(this.collectionName);
             var documentCount = collection.CountDocuments(new BsonDocument());
-            
+
             if (documentCount == 0)
             {
                 collection.InsertMany(initialDocuments);
             }
         }
+    }
+
+    private static bool CollectionExists(IMongoDatabase database, string collectionName)
+    {
+        var filter = new BsonDocument("name", collectionName);
+        var collections = database.ListCollections(new ListCollectionsOptions { Filter = filter });
+
+        return collections.Any();
     }
 }
