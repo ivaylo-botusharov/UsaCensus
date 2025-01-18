@@ -1,6 +1,6 @@
 using UsaCensus.API.Endpoints;
 using UsaCensus.API.Models;
-using UsaCensus.API.Services;
+using UsaCensus.API.Repositories;
 using UsaCensus.API.Initializers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +12,7 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddHttpClient();
 
-builder.Services.AddSingleton<DemographicsService>();
+builder.Services.AddSingleton<IDemographicsRepository, DemographicsRepository>();
 
 var app = builder.Build();
 

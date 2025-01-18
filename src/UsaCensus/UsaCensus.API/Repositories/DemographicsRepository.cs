@@ -3,13 +3,13 @@ using MongoDB.Driver;
 
 using UsaCensus.API.Models;
 
-namespace UsaCensus.API.Services;
+namespace UsaCensus.API.Repositories;
 
-public class DemographicsService
+public class DemographicsRepository : IDemographicsRepository
 {
     private readonly IMongoCollection<Demographics> demographicsCollection;
     
-    public DemographicsService(IOptions<UsaCensusDatabaseSettings> usaCensusDatabaseSettings)
+    public DemographicsRepository(IOptions<UsaCensusDatabaseSettings> usaCensusDatabaseSettings)
     {
         MongoClient mongoClient = new (usaCensusDatabaseSettings.Value.ConnectionString);
         
@@ -18,7 +18,7 @@ public class DemographicsService
         this.demographicsCollection = mongoDatabase.GetCollection<Demographics>(
             usaCensusDatabaseSettings.Value.DemographicsCollectionName);
     }
-
+    
     public async Task<List<Demographics>> GetAsync() =>
         await this.demographicsCollection.Find(_ => true).ToListAsync();
     
