@@ -10,6 +10,8 @@ builder.Services.Configure<UsaCensusDatabaseSettings>(
 
 builder.Services.AddOpenApi();
 
+builder.Services.AddHttpClient();
+
 builder.Services.AddSingleton<DemographicsService>();
 
 var app = builder.Build();
