@@ -1,0 +1,6 @@
+@UsaCensus.API_HostAddress = http://localhost:5148
+
+GET {{UsaCensus.API_HostAddress}}/demographics/
+Accept: application/json
+
+###
