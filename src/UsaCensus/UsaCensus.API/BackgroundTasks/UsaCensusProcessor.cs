@@ -19,6 +19,20 @@ public class UsaCensusProcessor : IUsaCensusProcessor
 
     public async Task ProcessCountiesDemographicsAsync()
     {
+        string arcGisBaseUrl = this.arcGisUrlSettings.BaseUrl;
+
+        UsaCensusCounties usaCensusCounties = this.arcGisUrlSettings.UsaCensusCounties;
+
+        string usaCensusCountiesSegment = usaCensusCounties.Segment;
+        
+        Dictionary<string, string> usaCensusCountiesQueryParameters = new()
+        {
+            ["where"] = "1=1",
+            ["outFields"] = "population, state_name",
+            ["returnGeometry"] = "false",
+            ["f"] = "pjson"
+        };
+
         await Task.Delay(1000);
     }
 }
