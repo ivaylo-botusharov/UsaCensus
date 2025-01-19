@@ -13,7 +13,7 @@ builder.AddServiceDefaults();
 builder.Services.Configure<UsaCensusDatabaseSettings>(
     builder.Configuration.GetSection("UsaCensusDatabase"));
 
-builder.Services.Configure<UsaCensusDatabaseSettings>(
+builder.Services.Configure<ArcGisUrlSettings>(
     builder.Configuration.GetSection("ArcGisUrlSettings"));
 
 builder.Services.AddOpenApi();
@@ -22,13 +22,7 @@ builder.Services.AddHttpClient();
 
 builder.Services.AddSingleton<IDemographicsRepository, DemographicsRepository>();
 
-builder.Services.AddScoped<IUsaCensusProcessor>(provider =>
-{
-    var arcGisUrlSettings = provider.GetRequiredService<IOptions<ArcGisUrlSettings>>().Value;
-    var usaCensusDatabaseSettings = provider.GetRequiredService<IOptions<UsaCensusDatabaseSettings>>().Value;
-    
-    return new UsaCensusProcessor(arcGisUrlSettings, usaCensusDatabaseSettings);
-});
+builder.Services.AddScoped<IUsaCensusProcessor, UsaCensusProcessor>();
 
 var app = builder.Build();
 
