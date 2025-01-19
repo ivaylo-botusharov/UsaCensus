@@ -91,4 +91,10 @@ dotnet new worker -o UsaCensus.BackgroundTasks
 
 8.3. Further improvements - Use advanced Background jobs library (e.g. Hangfire)
 
+9. Fix warnings
+
+10. Configure .NET Analyzer (Roslyn Analyzer) for both projects and fix warnings
+
+11. Check OpenAPI generated documentation
+
 ---
