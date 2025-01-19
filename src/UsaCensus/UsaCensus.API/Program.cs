@@ -1,6 +1,7 @@
 using UsaCensus.API.BackgroundTasks;
 using UsaCensus.API.Endpoints;
 using UsaCensus.API.Initializers;
+using UsaCensus.API.Infrastructure.Http;
 using UsaCensus.API.Models;
 using UsaCensus.API.Repositories;
 using UsaCensus.API.ServiceDefaults;
@@ -21,6 +22,8 @@ builder.Services.AddOpenApi();
 builder.Services.AddHttpClient();
 
 builder.Services.AddSingleton<IDemographicsRepository, DemographicsRepository>();
+
+builder.Services.AddSingleton<IHttpClientWrapper, HttpClientWrapper>();
 
 builder.Services.AddScoped<IUsaCensusProcessor, UsaCensusProcessor>();
 

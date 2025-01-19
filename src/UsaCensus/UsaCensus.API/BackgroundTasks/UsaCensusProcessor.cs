@@ -1,5 +1,7 @@
-using UsaCensus.API.Models;
 using Microsoft.Extensions.Options;
+
+using UsaCensus.API.Infrastructure.Http;
+using UsaCensus.API.Models;
 
 namespace UsaCensus.API.BackgroundTasks;
 
@@ -9,12 +11,16 @@ public class UsaCensusProcessor : IUsaCensusProcessor
 
     private readonly UsaCensusDatabaseSettings usaCensusDatabaseSettings;
 
+    private readonly IHttpClientWrapper httpClientWrapper;
+
     public UsaCensusProcessor(
         IOptions<ArcGisUrlSettings> arcGisUrlSettings,
-        IOptions<UsaCensusDatabaseSettings> usaCensusDatabaseSettings)
+        IOptions<UsaCensusDatabaseSettings> usaCensusDatabaseSettings,
+        IHttpClientWrapper httpClientWrapper)
     {
         this.arcGisUrlSettings = arcGisUrlSettings.Value;
         this.usaCensusDatabaseSettings = usaCensusDatabaseSettings.Value;
+        this.httpClientWrapper = httpClientWrapper;
     }
 
     public async Task ProcessCountiesDemographicsAsync()
