@@ -72,8 +72,34 @@ public class DemographicsRepository : IDemographicsRepository
         }
     }
 
-    public async Task BulkInsertAsync(IList<Demographics> demographicsList) =>
-        await this.demographicsCollection.InsertManyAsync(demographicsList);
+    // public async Task BulkInsertAsync(IList<Demographics> demographicsList) =>
+    //     await this.demographicsCollection.InsertManyAsync(demographicsList);
+
+    public async Task<Result<bool>> BulkInsertAsync(IList<Demographics> demographicsList)
+    {
+        try
+        {
+            await this.demographicsCollection.InsertManyAsync(demographicsList);
+
+            return Result<bool>.Success(true);
+        }
+        catch (MongoWriteException ex)
+        {
+            return Result<bool>.Failure($"Write error occurred");
+        }
+        catch (MongoException ex)
+        {
+            return Result<bool>.Failure($"MongoDB error occurred: {ex.Message}");
+        }
+        catch (TimeoutException ex)
+        {
+            return Result<bool>.Failure($"Timeout error occurred: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            return Result<bool>.Failure($"An unexpected error occurred: {ex.Message}");
+        }
+    }
 
     public async Task ClearCollectionAsync() =>
         await this.demographicsCollection.DeleteManyAsync(FilterDefinition<Demographics>.Empty);

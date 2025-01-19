@@ -9,7 +9,7 @@ public interface IDemographicsRepository
 
     Task<Result<Demographics?>> GetByStateNameAsync(string stateName);
 
-    Task BulkInsertAsync(IList<Demographics> demographicsList);
+    Task<Result<bool>> BulkInsertAsync(IList<Demographics> demographicsList);
 
     Task ClearCollectionAsync();
 }
