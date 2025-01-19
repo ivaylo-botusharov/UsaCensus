@@ -57,6 +57,7 @@ public class UsaCensusProcessor : IUsaCensusProcessor
 
         if (usaCensusCountiesResult.Value?.Features is null || !usaCensusCountiesResult.Value.Features.Any())
         {
+            // TODO: Log message that there are no features
             return;
         }
 
