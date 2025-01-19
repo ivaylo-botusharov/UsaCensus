@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 using UsaCensus.Infrastructure.Models;
@@ -40,9 +41,9 @@ public class DemographicsRepository : IDemographicsRepository
     public async Task ClearCollectionAsync() =>
         await this.demographicsCollection.DeleteManyAsync(FilterDefinition<Demographics>.Empty);
         
-    public async Task<Demographics> GetByStateNameAsync(string stateName)
+    public async Task<Demographics?> GetByStateNameAsync(string stateName)
     {
-        var filter = Builders<Demographics>.Filter.Eq(s => s.StateName, stateName);
+        var filter = Builders<Demographics>.Filter.Regex(s => s.StateName, new BsonRegularExpression(stateName, "i"));
         var stateDemographicsDocument = await this.demographicsCollection.Find(filter).FirstOrDefaultAsync();
 
         return stateDemographicsDocument;
