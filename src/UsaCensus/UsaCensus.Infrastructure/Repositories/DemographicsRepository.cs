@@ -72,9 +72,6 @@ public class DemographicsRepository : IDemographicsRepository
         }
     }
 
-    // public async Task BulkInsertAsync(IList<Demographics> demographicsList) =>
-    //     await this.demographicsCollection.InsertManyAsync(demographicsList);
-
     public async Task<Result<bool>> BulkInsertAsync(IList<Demographics> demographicsList)
     {
         try
