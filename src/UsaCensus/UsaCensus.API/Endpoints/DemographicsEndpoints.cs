@@ -6,7 +6,7 @@ public static class DemographicsEndpoints
 {
     public static void MapDemographicsEndpoints(this WebApplication app)
     {
-        RouteGroupBuilder demographics = app.MapGroup("/demographics");
+        RouteGroupBuilder demographics = app.MapGroup("/api/demographics");
 
         demographics
             .MapGet("/", async (IDemographicsRepository demographicsRepository) =>
