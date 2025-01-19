@@ -4,5 +4,5 @@ public class ArcGisUrlSettings
 {
     public string BaseUrl { get; set; }
 
-    public UsaCensusCounties UsaCensusCounties { get; set; }
+    public string UsaCensusCountiesSegment { get; set; }
 }

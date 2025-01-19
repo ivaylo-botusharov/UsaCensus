@@ -21,9 +21,7 @@ public class UsaCensusProcessor : IUsaCensusProcessor
     {
         string arcGisBaseUrl = this.arcGisUrlSettings.BaseUrl;
 
-        UsaCensusCounties usaCensusCounties = this.arcGisUrlSettings.UsaCensusCounties;
-
-        string usaCensusCountiesSegment = usaCensusCounties.Segment;
+        string usaCensusCountiesSegment = this.arcGisUrlSettings.UsaCensusCountiesSegment;
         
         Dictionary<string, string> usaCensusCountiesQueryParameters = new()
         {
