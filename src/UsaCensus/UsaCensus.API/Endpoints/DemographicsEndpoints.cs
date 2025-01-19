@@ -27,14 +27,19 @@ public static class DemographicsEndpoints
         demographics
             .MapGet("/{stateName}", async (string stateName, IDemographicsRepository demographicsRepository) =>
             {
-                var demographic = await demographicsRepository.GetByStateNameAsync(stateName);
-                
-                if (demographic == null)
+                Result<Demographics> demographicsResult = await demographicsRepository.GetByStateNameAsync(stateName);
+
+                if (demographicsResult.IsFailure)
+                {
+                    return Results.InternalServerError(demographicsResult.ErrorMessage);
+                }
+
+                if (demographicsResult.Value == null)
                 {
                     return Results.NotFound($"Demographics for state '{stateName}' not found.");
                 }
-
-                return Results.Ok(demographic);
+                
+                return Results.Ok(demographicsResult.Value);
             })
             .WithName("GetDemographicsByStateName");
     }

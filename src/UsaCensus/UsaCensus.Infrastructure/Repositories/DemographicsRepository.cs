@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 using UsaCensus.Infrastructure.Models;
 using UsaCensus.Infrastructure.Result;
@@ -42,12 +43,33 @@ public class DemographicsRepository : IDemographicsRepository
         }
     }
 
-    public async Task<Demographics?> GetByStateNameAsync(string stateName)
+    public async Task<Result<Demographics?>> GetByStateNameAsync(string stateName)
     {
-        var filter = Builders<Demographics>.Filter.Regex(s => s.StateName, new BsonRegularExpression(stateName, "i"));
-        var stateDemographicsDocument = await this.demographicsCollection.Find(filter).FirstOrDefaultAsync();
-        
-        return stateDemographicsDocument;
+        try
+        {
+            var stateDemographicsDocument = await this.demographicsCollection
+                .AsQueryable()
+                .FirstOrDefaultAsync(d => d.StateName.Equals(stateName, StringComparison.OrdinalIgnoreCase));
+            
+            if (stateDemographicsDocument == null)
+            {
+                return Result<Demographics?>.Success(null);
+            }
+
+            return Result<Demographics?>.Success(stateDemographicsDocument);
+        }
+        catch (MongoException ex)
+        {
+            return Result<Demographics?>.Failure($"MongoDB error occurred: {ex.Message}");
+        }
+        catch (TimeoutException ex)
+        {
+            return Result<Demographics?>.Failure($"Timeout error occurred: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            return Result<Demographics?>.Failure($"An unexpected error occurred: {ex.Message}");
+        }
     }
 
     public async Task BulkInsertAsync(IList<Demographics> demographicsList) =>

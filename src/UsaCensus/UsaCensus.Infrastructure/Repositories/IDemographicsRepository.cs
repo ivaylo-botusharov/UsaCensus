@@ -7,7 +7,7 @@ public interface IDemographicsRepository
 {
     Task<Result<List<Demographics>>> GetAsync();
 
-    Task<Demographics> GetByStateNameAsync(string stateName);
+    Task<Result<Demographics?>> GetByStateNameAsync(string stateName);
 
     Task BulkInsertAsync(IList<Demographics> demographicsList);
 
