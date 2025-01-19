@@ -11,7 +11,7 @@ public class Worker : BackgroundService
     public Worker(ILogger<Worker> logger, IUsaCensusProcessor usaCensusProcessor)
     {
         _logger = logger;
-        usaCensusProcessor = usaCensusProcessor;
+        this.usaCensusProcessor = usaCensusProcessor;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -23,7 +23,7 @@ public class Worker : BackgroundService
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
             }
 
-            await usaCensusProcessor.ProcessCountiesDemographicsAsync();
+            await this.usaCensusProcessor.ProcessCountiesDemographicsAsync();
 
             await Task.Delay(15000, stoppingToken);
         }

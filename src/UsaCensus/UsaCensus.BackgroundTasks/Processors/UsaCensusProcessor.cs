@@ -46,7 +46,7 @@ public class UsaCensusProcessor : IUsaCensusProcessor
             return;
         }
 
-        IList<Demographics> usaCensusStateDemographics = await this.CalculateStatePopulationTotalsAsync(usaCensusCountiesResult);
+        IList<Demographics> usaCensusStateDemographics = this.CalculateStatePopulationTotals(usaCensusCountiesResult);
 
         await this.demographicsRepository.ClearCollectionAsync();
 
@@ -76,7 +76,7 @@ public class UsaCensusProcessor : IUsaCensusProcessor
     }
 
     // aggregates population by state
-    private async Task<IList<Demographics>> CalculateStatePopulationTotalsAsync(Result<UsaCensusCounties> usaCensusCountiesResult)
+    private IList<Demographics> CalculateStatePopulationTotals(Result<UsaCensusCounties> usaCensusCountiesResult)
     {
         IEnumerable<UsaCensusCountiesFeaturesAttributes> usaCensusCountiesDemographics = usaCensusCountiesResult
             .Value
