@@ -1,6 +1,8 @@
 using Microsoft.Extensions.Options;
 
+using UsaCensus.API.BackgroundTasks.Models;
 using UsaCensus.API.Infrastructure.Http;
+using UsaCensus.API.Infrastructure.Result;
 using UsaCensus.API.Models;
 
 namespace UsaCensus.API.BackgroundTasks;
@@ -36,6 +38,11 @@ public class UsaCensusProcessor : IUsaCensusProcessor
             ["returnGeometry"] = "false",
             ["f"] = "pjson"
         };
+
+        Result<UsaCensusCounties> usaCensusCountiesResult = await this.httpClientWrapper.GetAsync<UsaCensusCounties>(
+            arcGisBaseUrl,
+            usaCensusCountiesSegment,
+            usaCensusCountiesQueryParameters);
 
         await Task.Delay(1000);
     }
