@@ -4,6 +4,7 @@ using UsaCensus.API.BackgroundTasks.Models;
 using UsaCensus.API.Infrastructure.Http;
 using UsaCensus.API.Infrastructure.Result;
 using UsaCensus.API.Models;
+using UsaCensus.API.Repositories;
 
 namespace UsaCensus.API.BackgroundTasks;
 
@@ -15,14 +16,18 @@ public class UsaCensusProcessor : IUsaCensusProcessor
 
     private readonly IHttpClientWrapper httpClientWrapper;
 
+    private readonly IDemographicsRepository demographicsRepository;
+
     public UsaCensusProcessor(
         IOptions<ArcGisUrlSettings> arcGisUrlSettings,
         IOptions<UsaCensusDatabaseSettings> usaCensusDatabaseSettings,
-        IHttpClientWrapper httpClientWrapper)
+        IHttpClientWrapper httpClientWrapper,
+        IDemographicsRepository demographicsRepository)
     {
         this.arcGisUrlSettings = arcGisUrlSettings.Value;
         this.usaCensusDatabaseSettings = usaCensusDatabaseSettings.Value;
         this.httpClientWrapper = httpClientWrapper;
+        this.demographicsRepository = demographicsRepository;
     }
 
     public async Task ProcessCountiesDemographicsAsync()
@@ -67,7 +72,9 @@ public class UsaCensusProcessor : IUsaCensusProcessor
                 Population = x.Sum(y => y.Population ?? 0)
             })
             .ToList();
-        
-        await Task.Delay(1000);
+
+        await this.demographicsRepository.ClearCollectionAsync();
+
+        await this.demographicsRepository.BulkInsertAsync(usaCensusStateDemographics);
     }
 }

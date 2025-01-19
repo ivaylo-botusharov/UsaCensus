@@ -13,4 +13,8 @@ public interface IDemographicsRepository
     Task UpdateAsync(string id, Demographics updatedDemographics);
     
     Task RemoveAsync(string id);
+
+    Task BulkInsertAsync(IList<Demographics> demographicsList);
+
+    Task ClearCollectionAsync();
 }
