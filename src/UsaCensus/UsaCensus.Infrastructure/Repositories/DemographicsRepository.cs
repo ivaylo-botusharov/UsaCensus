@@ -39,4 +39,12 @@ public class DemographicsRepository : IDemographicsRepository
 
     public async Task ClearCollectionAsync() =>
         await this.demographicsCollection.DeleteManyAsync(FilterDefinition<Demographics>.Empty);
+        
+    public async Task<Demographics> GetByStateNameAsync(string stateName)
+    {
+        var filter = Builders<Demographics>.Filter.Eq(s => s.StateName, stateName);
+        var stateDemographicsDocument = await this.demographicsCollection.Find(filter).FirstOrDefaultAsync();
+
+        return stateDemographicsDocument;
+    }
 }

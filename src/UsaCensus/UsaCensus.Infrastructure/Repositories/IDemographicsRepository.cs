@@ -17,4 +17,6 @@ public interface IDemographicsRepository
     Task BulkInsertAsync(IList<Demographics> demographicsList);
 
     Task ClearCollectionAsync();
+
+    Task<Demographics> GetByStateNameAsync(string stateName);
 }

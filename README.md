@@ -97,4 +97,6 @@ dotnet new worker -o UsaCensus.BackgroundTasks
 
 11. Check OpenAPI generated documentation
 
+12. Create mapping from Demographics model to DemographicsViewModel (no id field)
+
 ---
