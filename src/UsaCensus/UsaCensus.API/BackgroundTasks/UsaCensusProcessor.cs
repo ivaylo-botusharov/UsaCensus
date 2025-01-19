@@ -14,7 +14,7 @@ public class UsaCensusProcessor : IUsaCensusProcessor
         this.databaseSettings = databaseSettings;
     }
 
-    public async Task ProcessCountiesDemographics()
+    public async Task ProcessCountiesDemographicsAsync()
     {
         await Task.Delay(1000);
     }
