@@ -85,7 +85,7 @@ dotnet new worker -o UsaCensus.BackgroundTasks
 
 8. Write documentation
 
-8.1. Instructions how to run the Projects - prerequisites, etc
+8.1. Instructions how to run the Projects - prerequisites, etc.
 
 8.2. Explain made decisions, the usage of databases, classes and libraries, explain about horizontal scalability (Docker instances and Kubernetes), MongoDB sharding, possible integration of the UsaCensus API and Prometheus with Grafana or cloud solutions like Azure Monitor (Azure Application Insights).
 
@@ -98,5 +98,7 @@ dotnet new worker -o UsaCensus.BackgroundTasks
 11. Check OpenAPI generated documentation
 
 12. Create mapping from Demographics model to DemographicsViewModel (no id field)
+
+13. Remove not used methods from DemographicsRepository
 
 ---
