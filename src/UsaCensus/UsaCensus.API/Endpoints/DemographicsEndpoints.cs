@@ -1,4 +1,6 @@
+using UsaCensus.Infrastructure.Models;
 using UsaCensus.Infrastructure.Repositories;
+using UsaCensus.Infrastructure.Result;
 
 namespace UsaCensus.API.Endpoints;
 
@@ -11,9 +13,14 @@ public static class DemographicsEndpoints
         demographics
             .MapGet("/", async (IDemographicsRepository demographicsRepository) =>
             {
-                var demographics = await demographicsRepository.GetAsync();
+                Result<List<Demographics>> demographicsResult = await demographicsRepository.GetAsync();
+
+                if (demographicsResult.IsFailure)
+                {
+                    return Results.InternalServerError(demographicsResult.ErrorMessage);
+                }
                 
-                return Results.Ok(demographics);
+                return Results.Ok(demographicsResult.Value);
             })
             .WithName("GetAllDemographics");
         

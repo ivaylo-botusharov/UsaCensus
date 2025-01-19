@@ -1,22 +1,15 @@
 using UsaCensus.Infrastructure.Models;
+using UsaCensus.Infrastructure.Result;
 
 namespace UsaCensus.Infrastructure.Repositories;
 
 public interface IDemographicsRepository
 {
-    Task<List<Demographics>> GetAsync();
-    
-    Task<Demographics?> GetAsync(string id);
-    
-    Task CreateAsync(Demographics newDemographics);
-    
-    Task UpdateAsync(string id, Demographics updatedDemographics);
-    
-    Task RemoveAsync(string id);
+    Task<Result<List<Demographics>>> GetAsync();
+
+    Task<Demographics> GetByStateNameAsync(string stateName);
 
     Task BulkInsertAsync(IList<Demographics> demographicsList);
 
     Task ClearCollectionAsync();
-
-    Task<Demographics> GetByStateNameAsync(string stateName);
 }
