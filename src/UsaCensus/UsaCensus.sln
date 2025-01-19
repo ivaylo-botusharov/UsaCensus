@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsaCensus.API", "UsaCensus.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsaCensus.BackgroundTasks", "UsaCensus.BackgroundTasks\UsaCensus.BackgroundTasks.csproj", "{BD8A457A-850C-461B-8305-E0E067897457}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsaCensus.Infrastructure", "UsaCensus.Infrastructure\UsaCensus.Infrastructure.csproj", "{269C9038-C188-408C-84DF-E68212079901}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{BD8A457A-850C-461B-8305-E0E067897457}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD8A457A-850C-461B-8305-E0E067897457}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD8A457A-850C-461B-8305-E0E067897457}.Release|Any CPU.Build.0 = Release|Any CPU
+		{269C9038-C188-408C-84DF-E68212079901}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{269C9038-C188-408C-84DF-E68212079901}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{269C9038-C188-408C-84DF-E68212079901}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{269C9038-C188-408C-84DF-E68212079901}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,12 +1,17 @@
-namespace UsaCensus.BackgroundTasks;
+using UsaCensus.BackgroundTasks.Processors;
+
+namespace UsaCensus.BackgroundTasks.Workers;
 
 public class Worker : BackgroundService
 {
     private readonly ILogger<Worker> _logger;
 
-    public Worker(ILogger<Worker> logger)
+    private readonly IUsaCensusProcessor usaCensusProcessor;
+
+    public Worker(ILogger<Worker> logger, IUsaCensusProcessor usaCensusProcessor)
     {
         _logger = logger;
+        usaCensusProcessor = usaCensusProcessor;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -17,7 +22,10 @@ public class Worker : BackgroundService
             {
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
             }
-            await Task.Delay(1000, stoppingToken);
+
+            await usaCensusProcessor.ProcessCountiesDemographicsAsync();
+
+            await Task.Delay(15000, stoppingToken);
         }
     }
 }
