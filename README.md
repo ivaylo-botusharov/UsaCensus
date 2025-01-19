@@ -101,4 +101,6 @@ dotnet new worker -o UsaCensus.BackgroundTasks
 
 13. Remove not used methods from DemographicsRepository
 
+14. Set API URL segment to start with /api
+
 ---
