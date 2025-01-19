@@ -7,4 +7,6 @@ public class UsaCensusDatabaseSettings
     public string DatabaseName { get; set; } = null!;
 
     public string DemographicsCollectionName { get; set; } = null!;
+
+    public static string SectionName => "UsaCensusDatabase";
 }

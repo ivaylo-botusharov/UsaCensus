@@ -8,7 +8,7 @@ using Microsoft.Extensions.Options;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<UsaCensusDatabaseSettings>(
-    builder.Configuration.GetSection("UsaCensusDatabase"));
+    builder.Configuration.GetSection(UsaCensusDatabaseSettings.SectionName));
 
 builder.Services.AddOpenApi();
 

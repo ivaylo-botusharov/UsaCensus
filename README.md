@@ -59,7 +59,15 @@ try {
 
 ---
 
-TODO:
+### Create Background service project using a template
+
+```bash
+dotnet new worker -o UsaCensus.BackgroundTasks
+```
+
+---
+
+## TODO:
 
 1. Get by State name
 
