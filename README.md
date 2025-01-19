@@ -35,7 +35,7 @@ mongosh --port 27017
 ```
 
 ```bash
-use usa-census
+use usa_census
 ```
 
 ```bash
