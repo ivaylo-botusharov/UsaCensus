@@ -1,5 +1,4 @@
-using UsaCensus.API.Repositories;
-using UsaCensus.API.BackgroundTasks;
+using UsaCensus.Infrastructure.Repositories;
 
 namespace UsaCensus.API.Endpoints;
 
@@ -10,11 +9,9 @@ public static class DemographicsEndpoints
         RouteGroupBuilder demographics = app.MapGroup("/demographics");
 
         demographics
-            .MapGet("/", async (IDemographicsRepository demographicsRepository, IUsaCensusProcessor usaCensusProcessor) =>
+            .MapGet("/", async (IDemographicsRepository demographicsRepository) =>
             {
                 var demographics = await demographicsRepository.GetAsync();
-
-                await usaCensusProcessor.ProcessCountiesDemographicsAsync();
                 
                 return Results.Ok(demographics);
             })
