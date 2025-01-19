@@ -32,6 +32,29 @@ public class UsaCensusProcessor : IUsaCensusProcessor
 
     public async Task ProcessCountiesDemographicsAsync()
     {
+        Result<UsaCensusCounties> usaCensusCountiesResult = await this.GetUsaCensusCountiesResultAsync();
+
+        if (usaCensusCountiesResult.IsFailure)
+        {
+            // TODO: Log error
+            return;
+        }
+
+        if (usaCensusCountiesResult.Value?.Features is null || !usaCensusCountiesResult.Value.Features.Any())
+        {
+            // TODO: Log message that there are no features
+            return;
+        }
+
+        IList<Demographics> usaCensusStateDemographics = await this.CalculateStatePopulationTotalsAsync(usaCensusCountiesResult);
+
+        await this.demographicsRepository.ClearCollectionAsync();
+
+        await this.demographicsRepository.BulkInsertAsync(usaCensusStateDemographics);
+    }
+
+    private async Task<Result<UsaCensusCounties>> GetUsaCensusCountiesResultAsync()
+    {
         string arcGisBaseUrl = this.arcGisUrlSettings.BaseUrl;
 
         string usaCensusCountiesSegment = this.arcGisUrlSettings.UsaCensusCountiesSegment;
@@ -49,18 +72,12 @@ public class UsaCensusProcessor : IUsaCensusProcessor
             usaCensusCountiesSegment,
             usaCensusCountiesQueryParameters);
 
-        if (usaCensusCountiesResult.IsFailure)
-        {
-            // TODO: Log error
-            return;
-        }
+        return usaCensusCountiesResult;
+    }
 
-        if (usaCensusCountiesResult.Value?.Features is null || !usaCensusCountiesResult.Value.Features.Any())
-        {
-            // TODO: Log message that there are no features
-            return;
-        }
-
+    // aggregates population by state
+    private async Task<IList<Demographics>> CalculateStatePopulationTotalsAsync(Result<UsaCensusCounties> usaCensusCountiesResult)
+    {
         IEnumerable<UsaCensusCountiesFeaturesAttributes> usaCensusCountiesDemographics = usaCensusCountiesResult
             .Value
             .Features
@@ -73,9 +90,7 @@ public class UsaCensusProcessor : IUsaCensusProcessor
                 Population = x.Sum(y => y.Population ?? 0)
             })
             .ToList();
-
-        await this.demographicsRepository.ClearCollectionAsync();
-
-        await this.demographicsRepository.BulkInsertAsync(usaCensusStateDemographics);
+        
+        return usaCensusStateDemographics;
     }
 }
