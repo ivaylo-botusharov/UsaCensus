@@ -69,8 +69,6 @@ dotnet new worker -o UsaCensus.BackgroundTasks
 
 ## TODO:
 
-1. Get by State name
-
 2. Shared MongoDB connection string - move it to appsettings-shared.json in UsaCensus.Infrastructure
 
 3. Exception Handling for DemographicsRepository
@@ -100,7 +98,5 @@ dotnet new worker -o UsaCensus.BackgroundTasks
 12. Create mapping from Demographics model to DemographicsViewModel (no id field)
 
 13. Remove not used methods from DemographicsRepository
-
-14. Set API URL segment to start with /api
 
 ---

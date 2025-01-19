@@ -7,6 +7,11 @@ using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration
+    .SetBasePath(AppContext.BaseDirectory)
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile("Configuration/appsettings-shared.json", optional: false, reloadOnChange: false);
+
 builder.Services.Configure<UsaCensusDatabaseSettings>(
     builder.Configuration.GetSection(UsaCensusDatabaseSettings.SectionName));
 
