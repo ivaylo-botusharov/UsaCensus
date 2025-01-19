@@ -17,11 +17,11 @@ public class HttpClientWrapper : IHttpClientWrapper
     public async Task<Result<T>> GetAsync<T>(
         string baseUrl,
         string segment,
-        Dictionary<string, string>? parameters = null)
+        Dictionary<string, string>? queryParameters = null)
     {
-        string url = BuildUrl(baseUrl, segment, parameters);
+        string url = BuildUrl(baseUrl, segment, queryParameters);
 
-        using HttpClient httpClient = httpClientFactory.CreateClient();
+        HttpClient httpClient = httpClientFactory.CreateClient();
         
         try
         {
@@ -53,13 +53,13 @@ public class HttpClientWrapper : IHttpClientWrapper
         }
     }
 
-    private static string BuildUrl(string baseUrl, string segment, Dictionary<string, string>? parameters)
+    private static string BuildUrl(string baseUrl, string segment, Dictionary<string, string>? queryParameters)
     {
-        if (parameters != null && parameters.Any())
+        if (queryParameters != null && queryParameters.Any())
         {
             string queryString = string.Join(
                 "&",
-                parameters.Select(p => $"{Uri.EscapeDataString(p.Key)}={Uri.EscapeDataString(p.Value)}"));
+                queryParameters.Select(p => $"{Uri.EscapeDataString(p.Key)}={Uri.EscapeDataString(p.Value)}"));
 
             return $"{baseUrl}/{segment}?{queryString}";
         }

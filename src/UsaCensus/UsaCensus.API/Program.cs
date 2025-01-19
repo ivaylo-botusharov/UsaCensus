@@ -2,8 +2,11 @@ using UsaCensus.API.Endpoints;
 using UsaCensus.API.Models;
 using UsaCensus.API.Repositories;
 using UsaCensus.API.Initializers;
+using UsaCensus.API.ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.AddServiceDefaults();
 
 builder.Services.Configure<UsaCensusDatabaseSettings>(
     builder.Configuration.GetSection("UsaCensusDatabase"));
