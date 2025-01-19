@@ -10,7 +10,7 @@ public class Demographics
     public string? Id { get; set; }
 
     [BsonElement("population")]
-    public int Population { get; set; }
+    public long Population { get; set; }
 
     [BsonElement("stateName")]
     public string StateName { get; set; }

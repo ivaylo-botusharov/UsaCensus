@@ -44,6 +44,30 @@ public class UsaCensusProcessor : IUsaCensusProcessor
             usaCensusCountiesSegment,
             usaCensusCountiesQueryParameters);
 
+        if (usaCensusCountiesResult.IsFailure)
+        {
+            // TODO: Log error
+            return;
+        }
+
+        if (usaCensusCountiesResult.Value?.Features is null || !usaCensusCountiesResult.Value.Features.Any())
+        {
+            return;
+        }
+
+        IEnumerable<UsaCensusCountiesFeaturesAttributes> usaCensusCountiesDemographics = usaCensusCountiesResult
+            .Value
+            .Features
+            .Select(x => x.Attributes);
+        
+        IList<Demographics> usaCensusStateDemographics = usaCensusCountiesDemographics.GroupBy(x => x.StateName)
+            .Select(x => new Demographics
+            {
+                StateName = x.Key,
+                Population = x.Sum(y => y.Population ?? 0)
+            })
+            .ToList();
+        
         await Task.Delay(1000);
     }
 }
