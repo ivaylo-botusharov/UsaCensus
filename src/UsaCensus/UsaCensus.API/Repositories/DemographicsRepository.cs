@@ -34,17 +34,6 @@ public class DemographicsRepository : IDemographicsRepository
     public async Task RemoveAsync(string id) =>
         await this.demographicsCollection.DeleteOneAsync(x => x.Id == id);
 
-    // public async Task BulkInsertAsync(List<Demographics> stateDemographics)
-    // {
-    //     var stateDemographicsBsonDocuments = stateDemographics.Select(sd => new BsonDocument
-    //     {
-    //         { "population", sd.Population },
-    //         { "stateName", sd.StateName }
-    //     }).ToList();
-
-    //     await this.demographicsCollection.InsertManyAsync(stateDemographicsBsonDocuments);
-    // }
-
     public async Task BulkInsertAsync(IList<Demographics> demographicsList) =>
         await this.demographicsCollection.InsertManyAsync(demographicsList);
 
