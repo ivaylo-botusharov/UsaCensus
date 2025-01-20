@@ -13,6 +13,7 @@ namespace UsaCensus.Infrastructure.Database.Repositories;
 public partial class DemographicsRepository : IDemographicsRepository
 {
     private readonly IMongoCollection<Demographics> demographicsCollection;
+    
     private readonly ILogger<DemographicsRepository> logger;
 
     private const string TimeoutErrorOccurred = "Timeout error occurred.";
