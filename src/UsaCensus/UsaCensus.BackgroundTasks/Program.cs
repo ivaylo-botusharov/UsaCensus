@@ -4,10 +4,10 @@ using UsaCensus.BackgroundTasks.Models;
 using UsaCensus.BackgroundTasks.Processors;
 using UsaCensus.BackgroundTasks.ServiceDefaults;
 using UsaCensus.BackgroundTasks.Workers;
+using UsaCensus.Infrastructure.Database.Initializers;
+using UsaCensus.Infrastructure.Database.Models;
+using UsaCensus.Infrastructure.Database.Repositories;
 using UsaCensus.Infrastructure.Http;
-using UsaCensus.Infrastructure.Initializers;
-using UsaCensus.Infrastructure.Models;
-using UsaCensus.Infrastructure.Repositories;
 
 var builder = Host.CreateApplicationBuilder(args);
 

@@ -2,8 +2,8 @@ using Microsoft.Extensions.Options;
 
 using UsaCensus.BackgroundTasks.Models;
 using UsaCensus.Infrastructure.Http;
-using UsaCensus.Infrastructure.Models;
-using UsaCensus.Infrastructure.Repositories;
+using UsaCensus.Infrastructure.Database.Models;
+using UsaCensus.Infrastructure.Database.Repositories;
 using UsaCensus.Infrastructure.Result;
 
 namespace UsaCensus.BackgroundTasks.Processors;
@@ -55,7 +55,7 @@ public class UsaCensusProcessor : IUsaCensusProcessor
             // TODO: Log message that the collection cannot be cleared
             return;
         }
-        
+
         Result<bool> bulkInsertResult = await this.demographicsRepository.BulkInsertAsync(usaCensusStateDemographics);
 
         if (bulkInsertResult.IsFailure)

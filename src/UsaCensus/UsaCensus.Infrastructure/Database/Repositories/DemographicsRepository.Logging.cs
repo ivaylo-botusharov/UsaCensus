@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 
-namespace UsaCensus.Infrastructure.Repositories;
+namespace UsaCensus.Infrastructure.Database.Repositories;
 
 public partial class DemographicsRepository
 {

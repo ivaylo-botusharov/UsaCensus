@@ -1,9 +1,9 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-using UsaCensus.Infrastructure.Models;
+using UsaCensus.Infrastructure.Database.Models;
 
-namespace UsaCensus.Infrastructure.Initializers;
+namespace UsaCensus.Infrastructure.Database.Initializers;
 
 public class DatabaseInitializer
 {

@@ -1,5 +1,5 @@
-using UsaCensus.Infrastructure.Models;
-using UsaCensus.Infrastructure.Repositories;
+using UsaCensus.Infrastructure.Database.Models;
+using UsaCensus.Infrastructure.Database.Repositories;
 using UsaCensus.Infrastructure.Result;
 
 namespace UsaCensus.API.Endpoints;

@@ -1,7 +1,7 @@
-using UsaCensus.Infrastructure.Models;
+using UsaCensus.Infrastructure.Database.Models;
 using UsaCensus.Infrastructure.Result;
 
-namespace UsaCensus.Infrastructure.Repositories;
+namespace UsaCensus.Infrastructure.Database.Repositories;
 
 public interface IDemographicsRepository
 {

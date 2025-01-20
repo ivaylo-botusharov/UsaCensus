@@ -5,10 +5,10 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 
-using UsaCensus.Infrastructure.Models;
+using UsaCensus.Infrastructure.Database.Models;
 using UsaCensus.Infrastructure.Result;
 
-namespace UsaCensus.Infrastructure.Repositories;
+namespace UsaCensus.Infrastructure.Database.Repositories;
 
 public partial class DemographicsRepository : IDemographicsRepository
 {

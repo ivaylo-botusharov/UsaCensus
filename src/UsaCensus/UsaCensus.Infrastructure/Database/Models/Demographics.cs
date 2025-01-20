@@ -1,7 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace UsaCensus.Infrastructure.Models;
+namespace UsaCensus.Infrastructure.Database.Models;
 
 public class Demographics
 {

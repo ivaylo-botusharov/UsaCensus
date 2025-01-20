@@ -1,4 +1,4 @@
-namespace UsaCensus.Infrastructure.Models;
+namespace UsaCensus.Infrastructure.Database.Models;
 
 public class UsaCensusDatabaseSettings
 {
