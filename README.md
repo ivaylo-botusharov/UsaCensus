@@ -199,13 +199,15 @@ Health checks in ASP.NET Core
 
 ---
 
-## TODO:
+## UsaCensus.API OpenTelemetry configuration
 
-Since there is no time left for this task I consider several points for further improvements:
+For easier integration with Observability solutions in Production, decided to configure OpenTelemetry for UsaCensus.API (see: [Extensions.cs](/src/UsaCensus/UsaCensus.API/Extensions.cs)) and added for testing purposes two ASP.NET Core built-in metrics: `Microsoft.AspNetCore.Hosting` and `Microsoft.AspNetCore.Server.Kestrel`. The metrics endpoint is: `/metrics`, for me it is:
 
-1. **Configure Telemetry for the Project**
+```
+http://localhost:5148/metrics
+```
 
-Here the OpenTelemetry protocol and Microsoft classes implementing it could be used for the ASP.NET Core API project (UsaCensus.API), so that it would be easier for the application to be connected to Observability / Monitoring solution in Production.
+Added Prometheus scraping endpoint for further integration with Prometheus.
 
 * References:
 
