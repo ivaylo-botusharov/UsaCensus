@@ -148,6 +148,9 @@ Functional C#: Handling failures, input errors
 Error handling: Exception or Result?  
 <https://enterprisecraftsmanship.com/posts/error-handling-exception-or-result/>
 
+`CSharpFunctionalExtensions/CSharpFunctionalExtensions/Result/ResultT.cs`  
+<https://github.com/vkhorikov/CSharpFunctionalExtensions/blob/master/CSharpFunctionalExtensions/Result/ResultT.cs>
+
 ---
 
 ### Logging
