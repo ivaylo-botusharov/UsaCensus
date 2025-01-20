@@ -4,7 +4,6 @@ namespace UsaCensus.BackgroundTasks.Processors;
 
 public partial class UsaCensusProcessor
 {
-
     [LoggerMessage(EventId = 0, Level = LogLevel.Error, Message = "Error while fetching USA Census Counties.")]
     public static partial void LogFetchingCensusCountiesError(ILogger logger);
 

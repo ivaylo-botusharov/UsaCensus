@@ -18,11 +18,15 @@ builder.Services.Configure<UsaCensusDatabaseSettings>(
 
 builder.Services.AddOpenApi();
 
+builder.Services.AddHealthChecks();
+
 builder.Services.AddSingleton<IDemographicsRepository, DemographicsRepository>();
 
 builder.Services.AddLogging(builder => builder.AddConsole());
 
 WebApplication app = builder.Build();
+
+app.MapHealthChecks("/healthz");
 
 if (app.Environment.IsDevelopment())
 {

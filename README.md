@@ -182,6 +182,23 @@ Compile-time logging source generation
 
 ---
 
+## Observability
+
+### Healthcheck endpoints
+
+Added health check endpoint `/healthz` for UsaCensus.API in case it is integrated with Observability / Monitoring solution. For me on localhost it runs at:
+
+```
+http://localhost:5148/healthz
+```
+
+* References:
+
+Health checks in ASP.NET Core  
+<https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-9.0>
+
+---
+
 ## TODO:
 
 Since there is no time left for this task I consider several points for further improvements:
