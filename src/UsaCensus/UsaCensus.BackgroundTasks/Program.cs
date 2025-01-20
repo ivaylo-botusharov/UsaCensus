@@ -17,10 +17,10 @@ builder.Configuration
     .AddJsonFile("Configuration/appsettings-shared.json", optional: false, reloadOnChange: false);
 
 builder.Services.Configure<UsaCensusDatabaseSettings>(
-    builder.Configuration.GetSection("UsaCensusDatabase"));
+    builder.Configuration.GetSection(UsaCensusDatabaseSettings.SectionName));
 
 builder.Services.Configure<ArcGisUrlSettings>(
-    builder.Configuration.GetSection("ArcGisUrlSettings"));
+    builder.Configuration.GetSection(ArcGisUrlSettings.SectionName));
 
 builder.Services.AddHttpClient();
 
