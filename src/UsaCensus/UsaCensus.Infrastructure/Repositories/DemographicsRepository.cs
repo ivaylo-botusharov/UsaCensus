@@ -1,4 +1,6 @@
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
@@ -8,11 +10,20 @@ using UsaCensus.Infrastructure.Result;
 
 namespace UsaCensus.Infrastructure.Repositories;
 
-public class DemographicsRepository : IDemographicsRepository
+public partial class DemographicsRepository : IDemographicsRepository
 {
     private readonly IMongoCollection<Demographics> demographicsCollection;
+    private readonly ILogger<DemographicsRepository> logger;
+
+    private const string DatabaseErrorOccurred1001 = "Database error occurred. Internal error code: 1001.";
+
+    private const string DatabaseErrorOccurred1002 = "Database error occurred. Internal error code: 1002.";
+
+    private const string DatabaseErrorOccurred1003 = "Database error occurred. Internal error code: 1003.";
     
-    public DemographicsRepository(IOptions<UsaCensusDatabaseSettings> usaCensusDatabaseSettings)
+    public DemographicsRepository(
+        IOptions<UsaCensusDatabaseSettings> usaCensusDatabaseSettings,
+        ILogger<DemographicsRepository> logger)
     {
         MongoClient mongoClient = new (usaCensusDatabaseSettings.Value.ConnectionString);
         
@@ -20,6 +31,8 @@ public class DemographicsRepository : IDemographicsRepository
         
         this.demographicsCollection = mongoDatabase.GetCollection<Demographics>(
             usaCensusDatabaseSettings.Value.DemographicsCollectionName);
+
+        this.logger = logger;
     }
     
     public async Task<Result<List<Demographics>>> GetAsync()
@@ -29,17 +42,30 @@ public class DemographicsRepository : IDemographicsRepository
             var demographics = await this.demographicsCollection.Find(_ => true).ToListAsync();
             return Result<List<Demographics>>.Success(demographics);
         }
+        catch (MongoWriteException ex)
+        {
+            LogMongoWriteError(this.logger, ex, ex.WriteError.Code, ex.WriteError.Category.ToString());
+            return Result<List<Demographics>>.Failure(DatabaseErrorOccurred1001);
+        }
+        catch (MongoCommandException ex)
+        {
+            LogMongoCommandError(this.logger, ex, ex.Code, ex.CodeName);
+            return Result<List<Demographics>>.Failure(DatabaseErrorOccurred1002);
+        }
         catch (MongoException ex)
         {
-            return Result<List<Demographics>>.Failure($"MongoDB error occurred: {ex.Message}");
+            LogMongoError(this.logger, ex);
+            return Result<List<Demographics>>.Failure(DatabaseErrorOccurred1003);
         }
         catch (TimeoutException ex)
         {
-            return Result<List<Demographics>>.Failure($"Timeout error occurred: {ex.Message}");
+            LogTimeoutError(this.logger, ex);
+            return Result<List<Demographics>>.Failure("Timeout error occurred.");
         }
         catch (Exception ex)
         {
-            return Result<List<Demographics>>.Failure($"An unexpected error occurred: {ex.Message}");
+            LogUnexpectedError(this.logger, ex);
+            return Result<List<Demographics>>.Failure("An unexpected error occurred.");
         }
     }
 
@@ -58,17 +84,30 @@ public class DemographicsRepository : IDemographicsRepository
 
             return Result<Demographics?>.Success(stateDemographicsDocument);
         }
+        catch (MongoWriteException ex)
+        {
+            LogMongoWriteError(this.logger, ex, ex.WriteError.Code, ex.WriteError.Category.ToString());
+            return Result<Demographics?>.Failure(DatabaseErrorOccurred1001);
+        }
+        catch (MongoCommandException ex)
+        {
+            LogMongoCommandError(this.logger, ex, ex.Code, ex.CodeName);
+            return Result<Demographics?>.Failure(DatabaseErrorOccurred1002);
+        }
         catch (MongoException ex)
         {
-            return Result<Demographics?>.Failure($"MongoDB error occurred: {ex.Message}");
+            LogMongoError(this.logger, ex);
+            return Result<Demographics?>.Failure(DatabaseErrorOccurred1003);
         }
         catch (TimeoutException ex)
         {
-            return Result<Demographics?>.Failure($"Timeout error occurred: {ex.Message}");
+            LogTimeoutError(this.logger, ex);
+            return Result<Demographics?>.Failure("Timeout error occurred.");
         }
         catch (Exception ex)
         {
-            return Result<Demographics?>.Failure($"An unexpected error occurred: {ex.Message}");
+            LogUnexpectedError(this.logger, ex);
+            return Result<Demographics?>.Failure("An unexpected error occurred.");
         }
     }
 
@@ -82,19 +121,28 @@ public class DemographicsRepository : IDemographicsRepository
         }
         catch (MongoWriteException ex)
         {
-            return Result<bool>.Failure($"Write error occurred");
+            LogMongoWriteError(this.logger, ex, ex.WriteError.Code, ex.WriteError.Category.ToString());
+            return Result<bool>.Failure(DatabaseErrorOccurred1001);
+        }
+        catch (MongoCommandException ex)
+        {
+            LogMongoCommandError(this.logger, ex, ex.Code, ex.CodeName);
+            return Result<bool>.Failure(DatabaseErrorOccurred1002);
         }
         catch (MongoException ex)
         {
-            return Result<bool>.Failure($"MongoDB error occurred: {ex.Message}");
+            LogMongoError(this.logger, ex);
+            return Result<bool>.Failure(DatabaseErrorOccurred1003);
         }
         catch (TimeoutException ex)
         {
-            return Result<bool>.Failure($"Timeout error occurred: {ex.Message}");
+            LogTimeoutError(this.logger, ex);
+            return Result<bool>.Failure("Timeout error occurred.");
         }
         catch (Exception ex)
         {
-            return Result<bool>.Failure($"An unexpected error occurred: {ex.Message}");
+            LogUnexpectedError(this.logger, ex);
+            return Result<bool>.Failure("An unexpected error occurred.");
         }
     }
 
@@ -108,19 +156,28 @@ public class DemographicsRepository : IDemographicsRepository
         }
         catch (MongoWriteException ex)
         {
-            return Result<bool>.Failure($"Write error occurred: {ex.Message}");
+            LogMongoWriteError(this.logger, ex, ex.WriteError.Code, ex.WriteError.Category.ToString());
+            return Result<bool>.Failure(DatabaseErrorOccurred1001);
+        }
+        catch (MongoCommandException ex)
+        {
+            LogMongoCommandError(this.logger, ex, ex.Code, ex.CodeName);
+            return Result<bool>.Failure(DatabaseErrorOccurred1002);
         }
         catch (MongoException ex)
         {
-            return Result<bool>.Failure($"MongoDB error occurred: {ex.Message}");
+            LogMongoError(this.logger, ex);
+            return Result<bool>.Failure(DatabaseErrorOccurred1003);
         }
         catch (TimeoutException ex)
         {
-            return Result<bool>.Failure($"Timeout error occurred: {ex.Message}");
+            LogTimeoutError(this.logger, ex);
+            return Result<bool>.Failure("Timeout error occurred.");
         }
         catch (Exception ex)
         {
-            return Result<bool>.Failure($"An unexpected error occurred: {ex.Message}");
+            LogUnexpectedError(this.logger, ex);
+            return Result<bool>.Failure("An unexpected error occurred.");
         }
     }
 }

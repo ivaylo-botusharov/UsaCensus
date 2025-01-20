@@ -19,6 +19,8 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddSingleton<IDemographicsRepository, DemographicsRepository>();
 
+builder.Services.AddLogging(builder => builder.AddConsole());
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
