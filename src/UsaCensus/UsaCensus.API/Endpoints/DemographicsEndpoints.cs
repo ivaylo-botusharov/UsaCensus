@@ -1,3 +1,4 @@
+using UsaCensus.API.Models;
 using UsaCensus.Infrastructure.Database.Models;
 using UsaCensus.Infrastructure.Database.Repositories;
 using UsaCensus.Infrastructure.Result;
@@ -19,8 +20,13 @@ public static class DemographicsEndpoints
                 {
                     return Results.InternalServerError(demographicsResult.ErrorMessage);
                 }
+
+                List<DemographicsResponse> demographics = demographicsResult
+                    .Value?
+                    .Select(demographics => DemographicsResponse.Create(demographics))
+                    .ToList() ?? new List<DemographicsResponse>();
                 
-                return Results.Ok(demographicsResult.Value);
+                return Results.Ok(demographics);
             })
             .WithName("GetAllDemographics");
         
@@ -39,7 +45,9 @@ public static class DemographicsEndpoints
                     return Results.NotFound($"Demographics for state '{stateName}' not found.");
                 }
 
-                return Results.Ok(demographicsResult.Value);
+                DemographicsResponse demographicsForState = DemographicsResponse.Create(demographicsResult.Value);
+
+                return Results.Ok(demographicsForState);
             })
             .WithName("GetDemographicsByStateName");
     }
