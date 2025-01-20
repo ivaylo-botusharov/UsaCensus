@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 using UsaCensus.BackgroundTasks.Models;
@@ -8,7 +9,7 @@ using UsaCensus.Infrastructure.Result;
 
 namespace UsaCensus.BackgroundTasks.Processors;
 
-public class UsaCensusProcessor : IUsaCensusProcessor
+public partial class UsaCensusProcessor : IUsaCensusProcessor
 {
     private readonly ArcGisUrlSettings arcGisUrlSettings;
 
@@ -18,16 +19,20 @@ public class UsaCensusProcessor : IUsaCensusProcessor
 
     private readonly IDemographicsRepository demographicsRepository;
 
+    private readonly ILogger<UsaCensusProcessor> logger;
+
     public UsaCensusProcessor(
         IOptions<ArcGisUrlSettings> arcGisUrlSettings,
         IOptions<UsaCensusDatabaseSettings> usaCensusDatabaseSettings,
         IHttpClientWrapper httpClientWrapper,
-        IDemographicsRepository demographicsRepository)
+        IDemographicsRepository demographicsRepository,
+        ILogger<UsaCensusProcessor> logger)
     {
         this.arcGisUrlSettings = arcGisUrlSettings.Value;
         this.usaCensusDatabaseSettings = usaCensusDatabaseSettings.Value;
         this.httpClientWrapper = httpClientWrapper;
         this.demographicsRepository = demographicsRepository;
+        this.logger = logger;
     }
 
     public async Task ProcessCountiesDemographicsAsync()
@@ -36,13 +41,13 @@ public class UsaCensusProcessor : IUsaCensusProcessor
 
         if (usaCensusCountiesResult.IsFailure)
         {
-            // TODO: Log error
+            LogFetchingCensusCountiesError(this.logger);
             return;
         }
 
         if (usaCensusCountiesResult.Value?.Features is null || !usaCensusCountiesResult.Value.Features.Any())
         {
-            // TODO: Log message that there are no features
+            LogNoFeaturesFound(this.logger);
             return;
         }
 
@@ -52,7 +57,7 @@ public class UsaCensusProcessor : IUsaCensusProcessor
 
         if (clearCollectionResult.IsFailure)
         {
-            // TODO: Log message that the collection cannot be cleared
+            LogClearCollectionError(this.logger);
             return;
         }
 
@@ -60,7 +65,7 @@ public class UsaCensusProcessor : IUsaCensusProcessor
 
         if (bulkInsertResult.IsFailure)
         {
-            // TODO: Log error
+            LogBulkInsertError(this.logger);
         }
     }
 
