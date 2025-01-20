@@ -89,8 +89,8 @@ public class UsaCensusProcessor : IUsaCensusProcessor
     private IList<Demographics> CalculateStatePopulationTotals(Result<UsaCensusCounties> usaCensusCountiesResult)
     {
         IEnumerable<UsaCensusCountiesFeaturesAttributes> usaCensusCountiesDemographics = usaCensusCountiesResult
-            .Value
-            .Features
+            .Value!
+            .Features!
             .Select(x => x.Attributes);
         
         IList<Demographics> usaCensusStateDemographics = usaCensusCountiesDemographics.GroupBy(x => x.StateName)

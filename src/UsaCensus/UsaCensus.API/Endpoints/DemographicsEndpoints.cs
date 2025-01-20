@@ -27,7 +27,7 @@ public static class DemographicsEndpoints
         demographics
             .MapGet("/{stateName}", async (string stateName, IDemographicsRepository demographicsRepository) =>
             {
-                Result<Demographics> demographicsResult = await demographicsRepository.GetByStateNameAsync(stateName);
+                Result<Demographics?> demographicsResult = await demographicsRepository.GetByStateNameAsync(stateName);
 
                 if (demographicsResult.IsFailure)
                 {
