@@ -38,7 +38,7 @@ public static class DemographicsEndpoints
                 {
                     return Results.NotFound($"Demographics for state '{stateName}' not found.");
                 }
-                
+
                 return Results.Ok(demographicsResult.Value);
             })
             .WithName("GetDemographicsByStateName");
