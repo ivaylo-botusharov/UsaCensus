@@ -2,7 +2,20 @@
 
 1. Install Docker
 
+* **References:**
+
+Docker Desktop  
+<https://docs.docker.com/desktop/>
+
+Install Docker Desktop on Mac  
+<https://docs.docker.com/desktop/setup/install/mac-install/>
+
+Install Docker Engine  
+<https://docs.docker.com/engine/install/>
+
 2. Install mongosh
+
+3. Install MongoDB Community Edition for Docker
 
 ```bash
 docker pull mongodb/mongodb-community-server:latest
@@ -30,6 +43,8 @@ db.runCommand(
 
 ---
 
+### Connect to MongoDB and switch to database
+
 ```bash
 mongosh --port 27017
 ```
@@ -37,6 +52,10 @@ mongosh --port 27017
 ```bash
 use usa_census
 ```
+
+---
+
+### Insert records in demographics collection
 
 ```bash
 db.demographics.insertMany([{ population: 123, stateName: "Arizona" }, { population: 345, stateName: "California" }])
