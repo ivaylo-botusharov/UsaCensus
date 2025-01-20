@@ -110,14 +110,14 @@ For the UsaCensus.BackgroundTasks the method `builder.AddServiceDefaults();` con
 Build resilient HTTP apps: Key development patterns  
 <https://learn.microsoft.com/en-us/dotnet/core/resilience/http-resilience?tabs=dotnet-cli>
 
-ResilienceHttpClientBuilderExtensions.AddStandardResilienceHandler Method  
-<https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.resiliencehttpclientbuilderextensions.addstandardresiliencehandler?view=net-9.0-pp>
+Building resilient cloud services with .NET 8  
+<https://devblogs.microsoft.com/dotnet/building-resilient-cloud-services-with-dotnet-8/>
 
 Microsoft.Extensions.Http.Resilience  
 <https://www.nuget.org/packages/Microsoft.Extensions.Http.Resilience>
 
-Building resilient cloud services with .NET 8  
-<https://devblogs.microsoft.com/dotnet/building-resilient-cloud-services-with-dotnet-8/>
+ResilienceHttpClientBuilderExtensions.AddStandardResilienceHandler Method  
+<https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.resiliencehttpclientbuilderextensions.addstandardresiliencehandler?view=net-9.0-pp>
 
 `eShop/src/eShop.ServiceDefaults/Extensions.cs` - `builder.Services.ConfigureHttpClientDefaults()` 
 <https://github.com/dotnet/eShop/blob/7a23f90d13418eca59cb0a292a093589bad415f9/src/eShop.ServiceDefaults/Extensions.cs#L22>
