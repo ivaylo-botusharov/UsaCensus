@@ -103,7 +103,7 @@ Used HttpClient for making HTTP requests within the backend since it is one of t
 
 * **HTTP requests resilience**
 
-For the UsaCensus.BackgroundTasks the method `builder.AddServiceDefaults();` configures HttpClient defaults for retry policy, circuit braker and others
+For the UsaCensus.BackgroundTasks the method `builder.AddServiceDefaults();` configures HttpClient defaults, the so called Standard resilience pipeline (Rate limiter, Total timeout, Retry, Circuit breaker, Attempt timeout).
 
 * References:
 
