@@ -18,4 +18,16 @@ public partial class DemographicsRepository
 
     [LoggerMessage(EventId = 5, Level = LogLevel.Error, Message = "An unexpected error occurred.")]
     public static partial void LogUnexpectedError(ILogger logger, Exception ex);
+
+    [LoggerMessage(EventId = 6, Level = LogLevel.Information, Message = "Successfully retrieved demographics data.")]
+    public static partial void LogRetrieveInformation(ILogger logger);
+
+    [LoggerMessage(EventId = 7, Level = LogLevel.Information, Message = "Successfully inserted demographics data.")]
+    public static partial void LogInsertInformation(ILogger logger);
+
+    [LoggerMessage(EventId = 8, Level = LogLevel.Information, Message = "Successfully cleared demographics data.")]
+    public static partial void LogClearInformation(ILogger logger);
+
+    [LoggerMessage(EventId = 9, Level = LogLevel.Information, Message = "Successfully retrieved demographics data by state name: {StateName}.")]
+    public static partial void LogRetrieveByStateNameInformation(ILogger logger, string StateName);
 }

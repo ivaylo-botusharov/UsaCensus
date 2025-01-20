@@ -40,6 +40,8 @@ public partial class DemographicsRepository : IDemographicsRepository
         try
         {
             var demographics = await this.demographicsCollection.Find(_ => true).ToListAsync();
+            LogRetrieveInformation(this.logger);
+
             return Result<List<Demographics>>.Success(demographics);
         }
         catch (MongoWriteException ex)
@@ -82,6 +84,8 @@ public partial class DemographicsRepository : IDemographicsRepository
                 return Result<Demographics?>.Success(null);
             }
 
+            LogRetrieveByStateNameInformation(this.logger, stateName);
+
             return Result<Demographics?>.Success(stateDemographicsDocument);
         }
         catch (MongoWriteException ex)
@@ -116,6 +120,7 @@ public partial class DemographicsRepository : IDemographicsRepository
         try
         {
             await this.demographicsCollection.InsertManyAsync(demographicsList);
+            LogInsertInformation(this.logger);
 
             return Result<bool>.Success(true);
         }
@@ -151,6 +156,7 @@ public partial class DemographicsRepository : IDemographicsRepository
         try
         {
             await this.demographicsCollection.DeleteManyAsync(FilterDefinition<Demographics>.Empty);
+            LogClearInformation(this.logger);
 
             return Result<bool>.Success(true);
         }
