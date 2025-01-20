@@ -1,9 +1,10 @@
+using Microsoft.Extensions.Options;
+
 using UsaCensus.API.Endpoints;
 using UsaCensus.Infrastructure.Database.Initializers;
 using UsaCensus.Infrastructure.Database.Models;
 using UsaCensus.Infrastructure.Database.Repositories;
 using UsaCensus.Infrastructure.Http;
-using Microsoft.Extensions.Options;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
