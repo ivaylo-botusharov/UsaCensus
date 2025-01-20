@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Options;
 
+using UsaCensus.API;
 using UsaCensus.API.Endpoints;
 using UsaCensus.Infrastructure.Database.Initializers;
 using UsaCensus.Infrastructure.Database.Models;
@@ -24,9 +25,13 @@ builder.Services.AddSingleton<IDemographicsRepository, DemographicsRepository>()
 
 builder.Services.AddLogging(builder => builder.AddConsole());
 
+builder.ConfigureOpenTelemetry();
+
 WebApplication app = builder.Build();
 
-app.MapHealthChecks("/healthz");
+app.MapPrometheusScrapingEndpoint();
+
+app.MapHealthChecks("/healthz").DisableHttpMetrics();
 
 if (app.Environment.IsDevelopment())
 {

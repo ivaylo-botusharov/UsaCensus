@@ -79,7 +79,7 @@ I have selected to use `ASP.NET Core Web API` as a backend technology since it i
 
 ### Database
 
-I have selected `MongoDB` as a database, since the structure of data looks like documents in a single collection. There are no multiple entities with relations between them. Another point is that `MongoDB` could be horizontally scaled through sharding if there a quite high loads. MongoDB's document-based structure allows for a flexible schema, which means you can easily add or remove fields as the data evolves without having to alter the database schema. MongoDB integrates seamlessly with various programming languages and frameworks, facilitating the development and maintenance of the REST API.
+I have selected `MongoDB` as a database, since the structure of data looks like documents in a single collection. There are no multiple entities with relations between them. Another point is that `MongoDB` could be horizontally scaled through sharding if there are quite high loads. MongoDB's document-based structure allows for a flexible schema, which means you can easily add or remove fields as the data evolves without having to alter the database schema. MongoDB integrates seamlessly with various programming languages and frameworks, facilitating the development and maintenance of the REST API.
 
 ### .NET Background Tasks (BackgroundService)
 
