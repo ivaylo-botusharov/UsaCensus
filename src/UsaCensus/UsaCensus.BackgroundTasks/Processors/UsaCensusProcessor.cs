@@ -48,8 +48,14 @@ public class UsaCensusProcessor : IUsaCensusProcessor
 
         IList<Demographics> usaCensusStateDemographics = this.CalculateStatePopulationTotals(usaCensusCountiesResult);
 
-        await this.demographicsRepository.ClearCollectionAsync();
+        Result<bool> clearCollectionResult = await this.demographicsRepository.ClearCollectionAsync();
 
+        if (clearCollectionResult.IsFailure)
+        {
+            // TODO: Log message that the collection cannot be cleared
+            return;
+        }
+        
         Result<bool> bulkInsertResult = await this.demographicsRepository.BulkInsertAsync(usaCensusStateDemographics);
 
         if (bulkInsertResult.IsFailure)

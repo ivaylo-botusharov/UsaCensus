@@ -11,5 +11,5 @@ public interface IDemographicsRepository
 
     Task<Result<bool>> BulkInsertAsync(IList<Demographics> demographicsList);
 
-    Task ClearCollectionAsync();
+    Task<Result<bool>> ClearCollectionAsync();
 }

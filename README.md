@@ -95,7 +95,11 @@ dotnet new worker -o UsaCensus.BackgroundTasks
 
 12. Create mapping from Demographics model to DemographicsViewModel (no id field)
 
-13. Remove not used methods from DemographicsRepository
+13. Demographics Repository - BulkInsertAsync() use transaction
+
+14. Add database schema - constraints: stateName - unique, stateName - string, stateName - max chars 100; population - zero or positive integer
+
+14. Remove not used methods from DemographicsRepository
 
 ---
 

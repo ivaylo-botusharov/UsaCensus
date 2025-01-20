@@ -98,6 +98,29 @@ public class DemographicsRepository : IDemographicsRepository
         }
     }
 
-    public async Task ClearCollectionAsync() =>
-        await this.demographicsCollection.DeleteManyAsync(FilterDefinition<Demographics>.Empty);
+    public async Task<Result<bool>> ClearCollectionAsync()
+    {
+        try
+        {
+            await this.demographicsCollection.DeleteManyAsync(FilterDefinition<Demographics>.Empty);
+
+            return Result<bool>.Success(true);
+        }
+        catch (MongoWriteException ex)
+        {
+            return Result<bool>.Failure($"Write error occurred: {ex.Message}");
+        }
+        catch (MongoException ex)
+        {
+            return Result<bool>.Failure($"MongoDB error occurred: {ex.Message}");
+        }
+        catch (TimeoutException ex)
+        {
+            return Result<bool>.Failure($"Timeout error occurred: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            return Result<bool>.Failure($"An unexpected error occurred: {ex.Message}");
+        }
+    }
 }
