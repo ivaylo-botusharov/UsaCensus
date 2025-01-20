@@ -11,12 +11,6 @@ public class DatabaseInitializer
     private readonly string databaseName;
     private readonly string collectionName;
 
-    private readonly List<BsonDocument> initialDocuments =
-    [
-        new BsonDocument { { "population", 123 }, { "stateName", "Arizona" } },
-        new BsonDocument { { "population", 345 }, { "stateName", "California" } }
-    ];
-
     public DatabaseInitializer(UsaCensusDatabaseSettings settings)
     {
         this.mongoClient = new MongoClient(settings.ConnectionString);
@@ -32,19 +26,6 @@ public class DatabaseInitializer
         if (!collectionExists)
         {
             database.CreateCollection(this.collectionName);
-
-            var collection = database.GetCollection<BsonDocument>(this.collectionName);
-            collection.InsertMany(initialDocuments);
-        }
-        else
-        {
-            var collection = database.GetCollection<BsonDocument>(this.collectionName);
-            var documentCount = collection.CountDocuments(new BsonDocument());
-
-            if (documentCount == 0)
-            {
-                collection.InsertMany(initialDocuments);
-            }
         }
     }
 
