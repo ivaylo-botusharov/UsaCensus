@@ -14,6 +14,10 @@ public partial class DemographicsRepository : IDemographicsRepository
 {
     private readonly IMongoCollection<Demographics> demographicsCollection;
     private readonly ILogger<DemographicsRepository> logger;
+
+    private const string TimeoutErrorOccurred = "Timeout error occurred.";
+
+    private const string UnexpectedErrorOccurred = "An unexpected error occurred.";
     
     private const string DatabaseErrorOccurred1001 = "Database error occurred. Internal error code: 1001.";
 
@@ -62,12 +66,12 @@ public partial class DemographicsRepository : IDemographicsRepository
         catch (TimeoutException ex)
         {
             LogTimeoutError(this.logger, ex);
-            return Result<List<Demographics>>.Failure("Timeout error occurred.");
+            return Result<List<Demographics>>.Failure(TimeoutErrorOccurred);
         }
         catch (Exception ex)
         {
             LogUnexpectedError(this.logger, ex);
-            return Result<List<Demographics>>.Failure("An unexpected error occurred.");
+            return Result<List<Demographics>>.Failure(UnexpectedErrorOccurred);
         }
     }
 
@@ -106,12 +110,12 @@ public partial class DemographicsRepository : IDemographicsRepository
         catch (TimeoutException ex)
         {
             LogTimeoutError(this.logger, ex);
-            return Result<Demographics?>.Failure("Timeout error occurred.");
+            return Result<Demographics?>.Failure(TimeoutErrorOccurred);
         }
         catch (Exception ex)
         {
             LogUnexpectedError(this.logger, ex);
-            return Result<Demographics?>.Failure("An unexpected error occurred.");
+            return Result<Demographics?>.Failure(UnexpectedErrorOccurred);
         }
     }
 
@@ -142,12 +146,12 @@ public partial class DemographicsRepository : IDemographicsRepository
         catch (TimeoutException ex)
         {
             LogTimeoutError(this.logger, ex);
-            return Result<bool>.Failure("Timeout error occurred.");
+            return Result<bool>.Failure(TimeoutErrorOccurred);
         }
         catch (Exception ex)
         {
             LogUnexpectedError(this.logger, ex);
-            return Result<bool>.Failure("An unexpected error occurred.");
+            return Result<bool>.Failure(UnexpectedErrorOccurred);
         }
     }
 
@@ -178,12 +182,12 @@ public partial class DemographicsRepository : IDemographicsRepository
         catch (TimeoutException ex)
         {
             LogTimeoutError(this.logger, ex);
-            return Result<bool>.Failure("Timeout error occurred.");
+            return Result<bool>.Failure(TimeoutErrorOccurred);
         }
         catch (Exception ex)
         {
             LogUnexpectedError(this.logger, ex);
-            return Result<bool>.Failure("An unexpected error occurred.");
+            return Result<bool>.Failure(UnexpectedErrorOccurred);
         }
     }
 }
