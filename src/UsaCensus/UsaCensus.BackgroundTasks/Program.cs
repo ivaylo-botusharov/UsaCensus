@@ -30,7 +30,7 @@ builder.Services.AddSingleton<IHttpClientWrapper, HttpClientWrapper>();
 
 builder.Services.AddSingleton<IDemographicsRepository, DemographicsRepository>();
 
-builder.Services.AddHostedService<Worker>();
+builder.Services.AddHostedService<UsaCensusCountiesWorker>();
 builder.Services.AddSingleton<IUsaCensusProcessor, UsaCensusProcessor>();
 
 IHost host = builder.Build();

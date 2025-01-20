@@ -2,13 +2,13 @@ using UsaCensus.BackgroundTasks.Processors;
 
 namespace UsaCensus.BackgroundTasks.Workers;
 
-public class Worker : BackgroundService
+public class UsaCensusCountiesWorker : BackgroundService
 {
-    private readonly ILogger<Worker> _logger;
+    private readonly ILogger<UsaCensusCountiesWorker> _logger;
 
     private readonly IUsaCensusProcessor usaCensusProcessor;
 
-    public Worker(ILogger<Worker> logger, IUsaCensusProcessor usaCensusProcessor)
+    public UsaCensusCountiesWorker(ILogger<UsaCensusCountiesWorker> logger, IUsaCensusProcessor usaCensusProcessor)
     {
         _logger = logger;
         this.usaCensusProcessor = usaCensusProcessor;
@@ -20,7 +20,7 @@ public class Worker : BackgroundService
         {
             if (_logger.IsEnabled(LogLevel.Information))
             {
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+                _logger.LogInformation("UsaCensusCountiesWorker running at: {time}", DateTimeOffset.Now);
             }
 
             await this.usaCensusProcessor.ProcessCountiesDemographicsAsync();
