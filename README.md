@@ -69,40 +69,27 @@ dotnet new worker -o UsaCensus.BackgroundTasks
 
 ## TODO:
 
-3. Exception Handling for DemographicsRepository
+1. Add error code to Result and set error code in HttpClientWrapper catch statements
 
-4. Add error code to Result and set error code in HttpClientWrapper catch statements
+2. Configure Telemetry for UsaCensus.API Project
 
-5. Return maybe BadRequests with response body (properties - errorMessage, errorCode)
+3. Write documentation
 
-6. Add logging in some important methods - Setup Logger in Program.cs (maybe Console logger) - make sure Structured Logging is used within the app
+3.1. Instructions how to run the Projects - prerequisites, etc.
 
-7. Configure Telemetry for UsaCensus.API Project
+3.2. Explain made decisions, the usage of databases, classes (e.g. HttpClientWrapper, `Result<T>`) and libraries, explain about horizontal scalability (Docker instances and Kubernetes), MongoDB sharding, possible integration of the UsaCensus API and Prometheus with Grafana or cloud solutions like Azure Monitor (Azure Application Insights).
 
-8. Write documentation
+3.3. Further improvements - Use advanced Background jobs library (e.g. Hangfire)
 
-8.1. Instructions how to run the Projects - prerequisites, etc.
+4. Configure .NET Analyzer (Roslyn Analyzer) for both projects and fix warnings
 
-8.2. Explain made decisions, the usage of databases, classes (e.g. HttpClientWrapper, `Result<T>`) and libraries, explain about horizontal scalability (Docker instances and Kubernetes), MongoDB sharding, possible integration of the UsaCensus API and Prometheus with Grafana or cloud solutions like Azure Monitor (Azure Application Insights).
+5. Check OpenAPI generated documentation
 
-8.3. Further improvements - Use advanced Background jobs library (e.g. Hangfire)
+6. Demographics Repository - BulkInsertAsync() use transaction
 
-9. Fix warnings
-
-10. Configure .NET Analyzer (Roslyn Analyzer) for both projects and fix warnings
-
-11. Check OpenAPI generated documentation
-
-12. Create mapping from Demographics model to DemographicsViewModel (no id field)
-
-13. Demographics Repository - BulkInsertAsync() use transaction
-
-14. Add database schema - constraints: stateName - unique, stateName - string, stateName - max chars 100; population - zero or positive integer
-
-14. Remove not used methods from DemographicsRepository
+7. Add database schema - constraints: stateName - unique, stateName - string, stateName - max chars 100; population - zero or positive integer
 
 ---
-
 
 For now removed not used methods in DemographicsRepository (to be added later on):
 
@@ -119,3 +106,5 @@ public async Task<Demographics?> GetAsync(string id) =>
     public async Task RemoveAsync(string id) =>
         await this.demographicsCollection.DeleteOneAsync(x => x.Id == id);
 ```
+
+---
