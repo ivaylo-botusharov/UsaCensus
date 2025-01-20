@@ -17,7 +17,7 @@ public class Result<T>
         ErrorMessage = errorMessage;
     }
 
-    public static Result<T> Success(T value) => new Result<T>(true, value, string.Empty);
+    public static Result<T> Success(T? value) => new Result<T>(true, value, string.Empty);
 
     public static Result<T> Failure(string errorMessage) => new Result<T>(false, default, errorMessage);
 }

@@ -8,5 +8,5 @@ public class UsaCensusCountiesFeaturesAttributes
     public long? Population { get; set; }
 
     [JsonPropertyName("STATE_NAME")]
-    public string StateName { get; set; }
+    public required string StateName { get; set; }
 }

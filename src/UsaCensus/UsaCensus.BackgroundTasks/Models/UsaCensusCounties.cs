@@ -6,5 +6,5 @@ namespace UsaCensus.BackgroundTasks.Models;
 public class UsaCensusCounties
 {
     [JsonPropertyName("features")]
-    public IList<UsaCensusCountiesFeature> Features { get; set; }
+    public IList<UsaCensusCountiesFeature>? Features { get; set; }
 }

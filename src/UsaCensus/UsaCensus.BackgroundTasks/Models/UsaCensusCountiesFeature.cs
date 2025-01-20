@@ -5,5 +5,5 @@ namespace UsaCensus.BackgroundTasks.Models;
 public class UsaCensusCountiesFeature
 {
     [JsonPropertyName("attributes")]
-    public UsaCensusCountiesFeaturesAttributes Attributes { get; set; }
+    public required UsaCensusCountiesFeaturesAttributes Attributes { get; set; }
 }
