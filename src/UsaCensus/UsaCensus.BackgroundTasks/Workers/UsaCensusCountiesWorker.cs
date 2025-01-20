@@ -4,13 +4,13 @@ namespace UsaCensus.BackgroundTasks.Workers;
 
 public class UsaCensusCountiesWorker : BackgroundService
 {
-    private readonly ILogger<UsaCensusCountiesWorker> _logger;
+    private readonly ILogger<UsaCensusCountiesWorker> logger;
 
     private readonly IUsaCensusProcessor usaCensusProcessor;
 
     public UsaCensusCountiesWorker(ILogger<UsaCensusCountiesWorker> logger, IUsaCensusProcessor usaCensusProcessor)
     {
-        _logger = logger;
+        this.logger = logger;
         this.usaCensusProcessor = usaCensusProcessor;
     }
 
@@ -18,11 +18,11 @@ public class UsaCensusCountiesWorker : BackgroundService
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            if (_logger.IsEnabled(LogLevel.Information))
+            if (this.logger.IsEnabled(LogLevel.Information))
             {
-                _logger.LogInformation("UsaCensusCountiesWorker running at: {time}", DateTimeOffset.Now);
+                this.logger.LogInformation("UsaCensusCountiesWorker running at: {time}", DateTimeOffset.Now);
             }
-
+            
             await this.usaCensusProcessor.ProcessCountiesDemographicsAsync();
 
             await Task.Delay(15000, stoppingToken);
