@@ -105,7 +105,7 @@ Used HttpClient for making HTTP requests within the backend since it is one of t
 
 For the UsaCensus.BackgroundTasks the method `builder.AddServiceDefaults();` configures HttpClient defaults for retry policy, circuit braker and others
 
-* **References:**
+* References:
 
 `eShop/src/eShop.ServiceDefaults/Extensions.cs` - `builder.Services.ConfigureHttpClientDefaults()` 
 <https://github.com/dotnet/eShop/blob/7a23f90d13418eca59cb0a292a093589bad415f9/src/eShop.ServiceDefaults/Extensions.cs#L22>
@@ -120,7 +120,7 @@ HttpClientFactoryServiceCollectionExtensions.ConfigureHttpClientDefaults Method
 
 In order to avoid port exhaustion problems, decided to reuse HttpClient instances for as many HTTP requests as possible through the IHttpClientFactory interface (injected in HttpClientWrapper)
 
-* **References:**
+* References:
 
 IHttpClientFactory with .NET  
 <https://learn.microsoft.com/en-us/dotnet/core/extensions/httpclient-factory>
@@ -140,7 +140,7 @@ The need for this class emerged since for GET HTTP requests the .NET HttpClient 
 
 Decided to implement more functional style of error handling - catch the exceptions of I/O operations and pass Result objects with all the details to invoking methods. For example, if there is an exception during an IO operation, we could have some additional business logic and execute it depending on the Result values. Another point is that re-throwing exceptions is more expensive and catching them in another section of the code makes it more difficult to follow through and debug.
 
-* **References:**
+* References:
 
 Functional C#: Handling failures, input errors  
 <https://enterprisecraftsmanship.com/posts/functional-c-handling-failures-input-errors/>
@@ -157,7 +157,7 @@ Error handling: Exception or Result?
 
 Implemented logging within the application (DemographicsRepository, HttpClientWrapper) using the benefits of compile-time logging source generation. For now the Logging provider is the console, but it could be easily changed to use another provider.
 
-* **References:**
+* References:
 
 Logging in C# and .NET  
 <https://learn.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line>
@@ -172,7 +172,7 @@ Since there is no time left for this task I consider several points for further 
 
 Here the OpenTelemetry protocol and Microsoft classes implementing it could be used for the ASP.NET Core API project (UsaCensus.API), so that it would be easier for the application to be connected to Observability / Monitoring solution in Production.
 
-* **References:**
+* References:
 
 eShop/src/eShop.ServiceDefaults/Extensions.cs - ConfigureOpenTelemetry()
 <https://github.com/dotnet/eShop/blob/7a23f90d13418eca59cb0a292a093589bad415f9/src/eShop.ServiceDefaults/Extensions.cs#L50>
