@@ -14,7 +14,7 @@ public partial class DemographicsRepository : IDemographicsRepository
 {
     private readonly IMongoCollection<Demographics> demographicsCollection;
     private readonly ILogger<DemographicsRepository> logger;
-
+    
     private const string DatabaseErrorOccurred1001 = "Database error occurred. Internal error code: 1001.";
 
     private const string DatabaseErrorOccurred1002 = "Database error occurred. Internal error code: 1002.";

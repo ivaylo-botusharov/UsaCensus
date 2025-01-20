@@ -6,7 +6,7 @@ using UsaCensus.Infrastructure.Result;
 
 namespace UsaCensus.Infrastructure.Http;
 
-public class HttpClientWrapper : IHttpClientWrapper
+public partial class HttpClientWrapper : IHttpClientWrapper
 {
     private readonly IHttpClientFactory httpClientFactory;
     private readonly ILogger<HttpClientWrapper> logger;
@@ -32,26 +32,27 @@ public class HttpClientWrapper : IHttpClientWrapper
                 url,
                 new JsonSerializerOptions(JsonSerializerDefaults.Web));
 
+            LogInformation(this.logger, url);
             return Result<T>.Success(result);
         }
         catch (HttpRequestException ex)
         {
-            this.logger.LogError($"Network error: {ex.Message}");
+            LogNetworkError(this.logger, ex.Message);
             return Result<T>.Failure("A network error occurred. Please, contact administrator (error code: 9110)");
         }
         catch (NotSupportedException ex)
         {
-            this.logger.LogError($"The content type is not supported: {ex.Message}");
+            LogContentTypeNotSupportedError(this.logger, ex.Message);
             return Result<T>.Failure("The content type is not supported. Please, contact administrator (error code: 9215)");
         }
         catch (JsonException ex)
         {
-            this.logger.LogError($"Error deserializing the JSON response: {ex.Message}");
+            LogJsonDeserializationError(this.logger, ex.Message);
             return Result<T>.Failure("An error occurred. Please, contact administrator (error code: 9200)");
         }
         catch (Exception ex)
         {
-            this.logger.LogError($"An unexpected error occurred: {ex.Message}");
+            LogUnexpectedError(this.logger, ex.Message);
             return Result<T>.Failure("An unexpected error occurred. Please, contact administrator (error code: 9000)");
         }
     }
