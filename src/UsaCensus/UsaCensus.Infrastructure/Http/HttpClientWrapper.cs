@@ -9,7 +9,16 @@ namespace UsaCensus.Infrastructure.Http;
 public partial class HttpClientWrapper : IHttpClientWrapper
 {
     private readonly IHttpClientFactory httpClientFactory;
+    
     private readonly ILogger<HttpClientWrapper> logger;
+
+    private const string NetworkErrorMessage = "A network error occurred. Please, contact administrator (error code: 9110)";
+
+    private const string ContentTypeNotSupportedErrorMessage = "The content type is not supported. Please, contact administrator (error code: 9215)";
+
+    private const string JsonDeserializationErrorMessage = "An error occurred. Please, contact administrator (error code: 9200)";
+
+    private const string UnexpectedErrorMessage = "An unexpected error occurred. Please, contact administrator (error code: 9000)";
 
     public HttpClientWrapper(IHttpClientFactory httpClientFactory, ILogger<HttpClientWrapper> logger)
     {
@@ -38,22 +47,22 @@ public partial class HttpClientWrapper : IHttpClientWrapper
         catch (HttpRequestException ex)
         {
             LogNetworkError(this.logger, ex.Message);
-            return Result<T>.Failure("A network error occurred. Please, contact administrator (error code: 9110)");
+            return Result<T>.Failure(NetworkErrorMessage);
         }
         catch (NotSupportedException ex)
         {
             LogContentTypeNotSupportedError(this.logger, ex.Message);
-            return Result<T>.Failure("The content type is not supported. Please, contact administrator (error code: 9215)");
+            return Result<T>.Failure(ContentTypeNotSupportedErrorMessage);
         }
         catch (JsonException ex)
         {
             LogJsonDeserializationError(this.logger, ex.Message);
-            return Result<T>.Failure("An error occurred. Please, contact administrator (error code: 9200)");
+            return Result<T>.Failure(JsonDeserializationErrorMessage);
         }
         catch (Exception ex)
         {
             LogUnexpectedError(this.logger, ex.Message);
-            return Result<T>.Failure("An unexpected error occurred. Please, contact administrator (error code: 9000)");
+            return Result<T>.Failure(UnexpectedErrorMessage);
         }
     }
 
