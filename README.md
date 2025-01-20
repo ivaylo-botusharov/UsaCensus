@@ -177,6 +177,9 @@ Implemented logging within the application (DemographicsRepository, HttpClientWr
 Logging in C# and .NET  
 <https://learn.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line>
 
+Compile-time logging source generation  
+<https://learn.microsoft.com/en-us/dotnet/core/extensions/logger-message-generator>
+
 ---
 
 ## TODO:
