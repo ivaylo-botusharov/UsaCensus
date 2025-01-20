@@ -33,7 +33,7 @@ dotnet run
 
 Initially, when the application starts DatabaseIntializer will create database `usa_census` (if it does not exist) and will create a collection `demographics`.
 
-Afterwards, on every 15 seconds it makes an HTTP request to ArcGIS Services, gets the US Counties and their population, aggregates the population by state name, if there are any documents in `demographics` collection deletes them and then inserts the state demographics data (stateName, population).
+Afterwards, on every 15 seconds it makes an HTTP request to ArcGIS Services, gets the US Counties and their population, aggregates the population by state name, if there are any documents in `demographics` collection deletes them and then inserts the newly fetched state demographics data (stateName, population).
 
 2. **Start UsaCensus.API**
 
