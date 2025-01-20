@@ -211,8 +211,20 @@ Added Prometheus scraping endpoint for further integration with Prometheus.
 
 * References:
 
+Example: Use OpenTelemetry with Prometheus, Grafana, and Jaeger  
+<https://learn.microsoft.com/en-us/dotnet/core/diagnostics/observability-prgrja-example>
+
 eShop/src/eShop.ServiceDefaults/Extensions.cs - ConfigureOpenTelemetry()
 <https://github.com/dotnet/eShop/blob/7a23f90d13418eca59cb0a292a093589bad415f9/src/eShop.ServiceDefaults/Extensions.cs#L50>
+
+ASP.NET Core metrics  
+<https://learn.microsoft.com/en-us/aspnet/core/log-mon/metrics/metrics?view=aspnetcore-9.0>
+
+ASP.NET Core metrics  
+<https://learn.microsoft.com/en-us/dotnet/core/diagnostics/built-in-metrics-aspnetcore>
+
+Prometheus Exporter AspNetCore for OpenTelemetry .NET  
+<https://github.com/open-telemetry/opentelemetry-dotnet/blob/main/src/OpenTelemetry.Exporter.Prometheus.AspNetCore/README.md>
 
 ---
 
