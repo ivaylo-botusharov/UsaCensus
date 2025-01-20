@@ -107,6 +107,9 @@ For the UsaCensus.BackgroundTasks the method `builder.AddServiceDefaults();` con
 
 * **References:**
 
+`eShop/src/eShop.ServiceDefaults/Extensions.cs` - `builder.Services.ConfigureHttpClientDefaults()` 
+<https://github.com/dotnet/eShop/blob/7a23f90d13418eca59cb0a292a093589bad415f9/src/eShop.ServiceDefaults/Extensions.cs#L22>
+
 HttpClientFactoryServiceCollectionExtensions.ConfigureHttpClientDefaults Method  
 <https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.httpclientfactoryservicecollectionextensions.configurehttpclientdefaults?view=net-9.0-pp>
 
