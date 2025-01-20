@@ -9,7 +9,7 @@ using UsaCensus.Infrastructure.Database.Models;
 using UsaCensus.Infrastructure.Database.Repositories;
 using UsaCensus.Infrastructure.Http;
 
-var builder = Host.CreateApplicationBuilder(args);
+HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
 builder.Configuration
     .SetBasePath(AppContext.BaseDirectory)
@@ -33,9 +33,12 @@ builder.Services.AddSingleton<IDemographicsRepository, DemographicsRepository>()
 builder.Services.AddHostedService<Worker>();
 builder.Services.AddSingleton<IUsaCensusProcessor, UsaCensusProcessor>();
 
-var host = builder.Build();
+IHost host = builder.Build();
 
-var dbSettings = builder.Configuration.GetSection("UsaCensusDatabase").Get<UsaCensusDatabaseSettings>();
+UsaCensusDatabaseSettings? dbSettings = builder.Configuration
+    .GetSection(UsaCensusDatabaseSettings.SectionName)
+    .Get<UsaCensusDatabaseSettings>();
+
 DatabaseInitializer databaseInitializer = new(dbSettings);
 databaseInitializer.Initialize();
 

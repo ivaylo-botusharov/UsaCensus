@@ -5,7 +5,7 @@ using UsaCensus.Infrastructure.Database.Repositories;
 using UsaCensus.Infrastructure.Http;
 using Microsoft.Extensions.Options;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration
     .SetBasePath(AppContext.BaseDirectory)
@@ -21,7 +21,7 @@ builder.Services.AddSingleton<IDemographicsRepository, DemographicsRepository>()
 
 builder.Services.AddLogging(builder => builder.AddConsole());
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
