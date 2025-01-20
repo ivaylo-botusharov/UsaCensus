@@ -119,6 +119,9 @@ Microsoft.Extensions.Http.Resilience
 ResilienceHttpClientBuilderExtensions.AddStandardResilienceHandler Method  
 <https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.resiliencehttpclientbuilderextensions.addstandardresiliencehandler?view=net-9.0-pp>
 
+IHttpClientBuilder Interface  
+<https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.ihttpclientbuilder?view=net-9.0-pp>
+
 `eShop/src/eShop.ServiceDefaults/Extensions.cs` - `builder.Services.ConfigureHttpClientDefaults()` 
 <https://github.com/dotnet/eShop/blob/7a23f90d13418eca59cb0a292a093589bad415f9/src/eShop.ServiceDefaults/Extensions.cs#L22>
 
