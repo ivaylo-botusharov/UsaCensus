@@ -107,8 +107,8 @@ For the UsaCensus.BackgroundTasks the method `builder.AddServiceDefaults();` con
 
 * References:
 
-Build resilient HTTP apps: Key development patterns - Add resilience to an HTTP client  
-<https://learn.microsoft.com/en-us/dotnet/core/resilience/http-resilience?tabs=dotnet-cli#add-resilience-to-an-http-client>
+Build resilient HTTP apps: Key development patterns  
+<https://learn.microsoft.com/en-us/dotnet/core/resilience/http-resilience?tabs=dotnet-cli>
 
 ResilienceHttpClientBuilderExtensions.AddStandardResilienceHandler Method  
 <https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.resiliencehttpclientbuilderextensions.addstandardresiliencehandler?view=net-9.0-pp>
