@@ -75,7 +75,7 @@ You should see a JSON response with a single object for Arizona, something like:
 
 ### API technology
 
-I have selected to use `ASP.NET Core Web API` as a backend technology since it is a very mature framework created and supported by Microsoft. In addition, it performs very well in terms of requests per second (load testing) according TechEmpower benchmarks. One more point is that I have advanced knowledge of ASP.NET Core and .NET
+I have selected to use `ASP.NET Core Web API` as a backend technology since it is a very mature framework having advanced customization abilities, it is also created and supported by Microsoft. In addition, it performs very well in terms of requests per second (load testing) according to TechEmpower benchmarks. Another important point is that is a multiplatform framework (Linux, MacOS, Windows), which provides flexibility and lower costs when hosted on Linux servers. And last, but not least, my knowledge and experience in .NET helps me create more robust solutions.
 
 ### Database
 
