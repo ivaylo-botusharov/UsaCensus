@@ -1,11 +1,11 @@
-# Задача (Esri България)
+# Задание (Esri България)
 
-Разработване на background processing за обработка и REST API за предоставяне на демографски данни
+Разработване на background processing за обработка и REST API за предоставяне на демографски данни.
 
 ## Срок за изпълнение
 Срокът за изпълнение е 7 календарни дни
 
-Като резултат следва да бъдат предадени: 
+Като резултат следва да бъдат предадени:
 
 * Сорс код
 * Документ с обосновка за избора на използваните технологии, библиотеки, алгоритми, техники (опционално – по преценка на кандидата)
@@ -37,12 +37,12 @@
 * аргументиран избор на използваните технологии.
 * решение, което дава свобода на приложение. Например (но не само): мултиплатформеност.
 
-Адрес на услугата от която да се извличат данните:
+Адрес на услугата от която да се извличат данните:  
 https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_Census_Counties/FeatureServer/0
 
-Примерна заявка:
+Примерна заявка:  
 https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_Census_Counties/FeatureServer/0/query?where=1%3D1&outFields=population%2C+state_name&returnGeometry=false&f=pjson
 
-Документация за консумирането на картна услуга:
+Документация за консумирането на картна услуга:  
 https://developers.arcgis.com/rest/services-reference/enterprise/query-map-service-layer-.htm
 
