@@ -10,9 +10,14 @@ public class DatabaseInitializer
     private readonly IMongoClient mongoClient;
     private readonly string databaseName;
     private readonly string collectionName;
-
-    public DatabaseInitializer(UsaCensusDatabaseSettings settings)
+    
+    public DatabaseInitializer(UsaCensusDatabaseSettings? settings)
     {
+        if (settings is null)
+        {
+            throw new ArgumentNullException(nameof(settings));
+        }
+
         this.mongoClient = new MongoClient(settings.ConnectionString);
         this.databaseName = settings.DatabaseName;
         this.collectionName = settings.DemographicsCollectionName;
